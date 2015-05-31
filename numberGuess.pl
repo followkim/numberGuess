@@ -14,18 +14,22 @@
 $high = 10;
 $low = 1;
 
+# The user will change this flag when they want to quit.
+$play_again = 'Y';
+
 # Main loop.  Will only exit if user indicates that they don't want to continue.
-do {	
+while ($play_again eq 'Y') {	
 	
 	# Init Game variables
 	$answer = int(rand($high-$low))+$low;
 	$num_guesses = 0;
+	$guess = 0;					# Just in case the same answer is chosen.
 
 	# Print instructions at the start of every game.
 	print "Please guess a number between " . $low . " and " . $high . "\n";
 	
 	# Main game loop.
-	do {
+	while (($guess != $answer) and ($play_again eq 'Y')) {
 		chomp($guess = <>);
 		
 		# Make sure guess is a number.  If so, continue with game.
@@ -45,12 +49,12 @@ do {
 		} else {
 			if ($guess ne 'q') {
 				print "Please enter a number! (q to quit)\n";
+			} else {
+				$play_again = 'n';
 			}
 		}
-		
-	} while (($guess != $answer) and ($guess ne 'q'));
-	
-} while ($play_again eq 'Y') and ($guess ne 'q');
+	}
+}
 
 print "Thanks for playing!\n";
 

@@ -1,5 +1,15 @@
 #!/usr/bin/perl
 
+#############################################
+#											#
+#	numberGuess.pl							#
+#	Kimberley Anne Gray						#
+#	5/30/2015								#
+#											#
+#	A number guessing game written in Perl	#
+#											#
+#############################################
+
 # Parameters.  Can change to change difficulty.
 $high = 10;
 $low = 1;

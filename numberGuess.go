@@ -31,7 +31,7 @@ func main() {
 	
 	// Set up the flags with default values
 	lowPtr := flag.Int("low", Low, "Lowest possible answer")
-	highPtr := flag.Int("high", High, "Highest possible answer")
+	highPtr:= flag.Int("high", High, "Highest possible answer")
 	flag.Parse()
 	  
 	// Collect the command-line variables
@@ -46,10 +46,10 @@ func main() {
 	
 	// Seed random number generator
  	rand.Seed( time.Now().UTC().UnixNano())	
- 	
- 	// Flag used to indicate that we should stop game
-	play_again := "Y"
 
+	// play_again tracks if the user wants to quit.
+	play_again := "Y"
+	
 	// Main loop.  Will only exit if user indicates that they don't want to continue.
 	for (play_again == "Y") {
 		
@@ -65,27 +65,25 @@ func main() {
 		// Main game loop.
 		for ((guess != answer) && (play_again == "Y")) {
 			
-			// GEt input from user
+			// Get input from user
 			fmt.Scanln(&input)
+			guess, err = strconv.Atoi(input)
 			
 			// Make sure guess is a number.  If so, continue with game.
-			guess, err = strconv.Atoi(input)
 			if err == nil {
-				num_guesses++;
-				if (guess < answer) {
-					fmt.Println(guess, "is too low!")
-				} else if (guess > answer) {
-					fmt.Println(guess, "is too high!")
-				} else {
-					// User has guessed the correct answer, find out if they want to play again.
-					fmt.Println("Correct in", num_guesses, "guesses!  Play again? [Y/n]:")
-					fmt.Scanln(&play_again)
+				num_guesses++
+				switch { 
+					case guess < answer: fmt.Println(guess, "is too low!")
+					case guess > answer: fmt.Println(guess, "is too high!")
+					default:
+						// User has guessed the correct answer, find out if they want to play again.
+						fmt.Println("Correct in", num_guesses, "guesses!  Play again? [Y/n]:")
+						fmt.Scanln(&play_again)
 				}
-				
-			// If user didn't enter a number, check if they want to quit, or yell at them.
 			} else {
-				if (input != "q") {
-					fmt.Println("Please enter a number! (q to quit)", )
+				// If user didn't enter a number, check if they want to quit, or yell at them.
+				if input != "q" {
+					fmt.Println("Please enter a number! (q to quit)")
 				} else {
 					play_again = "n"
 				}

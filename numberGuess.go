@@ -14,12 +14,14 @@ import (
 	"math/rand"
 	"time"
 	"strconv"
+	"os"
+	"flag"
 )
 
-// Parameters.  Can change to change difficulty.
-const (	
-	High = 100
+// Default parameters.
+const (
 	Low = 1
+	High = 100
 )
 
 func main() {
@@ -27,24 +29,43 @@ func main() {
 	var err error
 	var input string
 	
- 	rand.Seed( time.Now().UTC().UnixNano())	// Seed random number generator
+	// Set up the flags with default values
+	lowPtr := flag.Int("low", Low, "Lowest possible answer")
+	highPtr := flag.Int("high", High, "Highest possible answer")
+	flag.Parse()
+	  
+	// Collect the command-line variables
+	low := *lowPtr
+	high := *highPtr
+	
+	// Check that we are working with valid parameters
+	if (high <= low) {
+		fmt.Println("Error: low value must be less then high value!")
+		os.Exit(-1)
+	}
+	
+	// Seed random number generator
+ 	rand.Seed( time.Now().UTC().UnixNano())	
+ 	
+ 	// Flag used to indicate that we should stop game
 	play_again := "Y"
 
 	// Main loop.  Will only exit if user indicates that they don't want to continue.
 	for (play_again == "Y") {
 		
-		// Init Game variables
-		answer := Low + rand.Intn(High-Low)
+		// Init number to guess
+		answer := low + rand.Intn(high-low)
 		
 		num_guesses := 0
 		guess := 0						// Just in case the same answer is chosen.
 
 		// Print instructions at the start of every game.
-		fmt.Println("Please guess a number between", Low, "and", High)
+		fmt.Println("Please guess a number between", low, "and", high)
 		
 		// Main game loop.
 		for ((guess != answer) && (play_again == "Y")) {
 			
+			// GEt input from user
 			fmt.Scanln(&input)
 			
 			// Make sure guess is a number.  If so, continue with game.

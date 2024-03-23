@@ -29,7 +29,7 @@ while (play_again == 'Y'):
 	
 	# Main game loop.
 	while ((int(guess) != answer) and (play_again == 'Y')):
-		guess_input = raw_input()
+		guess_input = input()
 		
 		# Make sure guess is a number.  If so, continue with game.
 		if (guess_input.isdigit()):
@@ -43,15 +43,14 @@ while (play_again == 'Y'):
 			else:
 				# User has guessed the correct answer, find out if they want to play again.
 				print ("Correct in %d guesses!  Play again? [Y/n]: " % num_guesses)
-				play_again = raw_input()
+				play_again = input()
 			
 		# If user didn't enter a number, check if they want to quit, or yell at them.
 		else:
 			if (guess_input != 'q'):
-				print "Please enter a number! (q to quit)"
+				print ("Please enter a number! (q to quit)")
 			else:
 				play_again = 'n'
 			
-print "Thanks for playing!";
-
+print ("Thanks for playing!");
 

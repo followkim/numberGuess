@@ -1,0 +1,19 @@
+randInt(1,10)→X
+0→G
+0→N
+
+While G≠X
+
+Disp "ENTER A GUESS:"
+Input G
+
+If G<X
+Disp "TOO LOW!"
+
+If G>X
+Disp "TOO HIGH!"
+N+1→N
+End
+
+Disp "YOU WIN!  YOUR GUESSES:"
+N

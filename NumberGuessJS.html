@@ -10,9 +10,7 @@
                 var guess = parseInt(document.getElementById("guess").value);
                 document.getElementById("guess").value = "";
 
-                if (Number.isNaN(guess)) {
-                        feedback.innerHTML = "Please enter a number between 1-100.";
-                } else {
+                if (guess) {
                         guesses += 1;
                         if (guess < answer) {
                                 feedback.innerHTML = guess + " is too low!";
@@ -21,14 +19,18 @@
                         } else {
                                 feedback.innerHTML = "You guessed it in " + guesses +" guesses!";
                                 document.getElementById('guessBtn').disabled = true;
+                                document.getElementById('guess').disabled = true;
                         }
+                } else {
+                        feedback.innerHTML = "Please enter a number between 1-100.";
                 }
         }
 
         function startGame() {
                 guesses = 0;
-                answer = Math.round(Math.random()*100);
+                answer = Math.round(Math.random()*100)+1;
                 document.getElementById('guessBtn').disabled = false;
+                document.getElementById('guess').disabled = false;
                 document.getElementById("guess").value="";
                 document.getElementById("feedback").innerHTML="";
         }

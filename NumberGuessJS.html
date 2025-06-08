@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body onload="startGame()">
+
+<script>
+        var answer = 0;
+        var guesses = 0;
+        function checkGuess() {
+                var feedback =  document.getElementById("feedback");
+                var guess = parseInt(document.getElementById("guess").value);
+                document.getElementById("guess").value = "";
+
+                if (Number.isNaN(guess)) {
+                        feedback.innerHTML = "Please enter a number between 1-100.";
+                } else {
+                        guesses += 1;
+                        if (guess < answer) {
+                                feedback.innerHTML = guess + " is too low!";
+                        } else if (guess > answer) {
+                                feedback.innerHTML = guess + " is too high!";
+                        } else {
+                                feedback.innerHTML = "You guessed it in " + guesses +" guesses!";
+                                document.getElementById('guessBtn').disabled = true;
+                        }
+                }
+        }
+
+        function startGame() {
+                guesses = 0;
+                answer = Math.round(Math.random()*100);
+                document.getElementById('guessBtn').disabled = false;
+                document.getElementById("guess").value="";
+                document.getElementById("feedback").innerHTML="";
+        }
+
+</script>
+
+
+<h2>NumberGuess</h2>
+<p id="feedback"></p>
+<p>Guess a number:<br>
+<input type="text" id="guess" name="guess"><br>
+<button type="button" id="guessBtn" onclick='checkGuess()'>Guess</button>
+<button type="button" id="newGame" onclick='startGame()'>New Game</button>
+
+<script>
+        var input = document.getElementById("guess");
+        input.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("guessBtn").click();
+                }
+        });
+</script>
+</body>
+</html>

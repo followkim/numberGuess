@@ -5,7 +5,7 @@ CREATE TABLE NumberGuess.NumberGuess (
   answer INT NOT NULL,
   guesses INT NULL DEFAULT 0,
   PRIMARY KEY (answer));
-
+INSERT INTO NumberGuess (answer) VALUES ((Rand()*100)+1);
 DROP PROCEDURE IF EXISTS Guess;
 
 DELIMITER $$
@@ -25,10 +25,9 @@ DROP procedure IF EXISTS ResetGame;
 DELIMITER $$
 CREATE PROCEDURE ResetGame ()
 BEGIN
-	UPDATE NumberGuess SET answer = Rand()*100, guesses = 0;
-
+	UPDATE NumberGuess SET answer = (Rand()*100)+1, guesses = 0;
+	select "Choose a number between 1 and 100"; 
 END$$
 
-DELIMITER ;
 CALL NumberGuess.ResetGame();
 CALL NumberGuess.Guess(50);

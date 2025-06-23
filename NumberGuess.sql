@@ -25,7 +25,8 @@ DROP procedure IF EXISTS ResetGame;
 DELIMITER $$
 CREATE PROCEDURE ResetGame ()
 BEGIN
-	INSERT INTO NumberGuess (answer) VALUES (Rand()*100);
+	UPDATE NumberGuess SET answer = Rand()*100, guesses = 0;
+
 END$$
 
 DELIMITER ;

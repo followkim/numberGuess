@@ -3,9 +3,9 @@
 let guess=0
 let answer=0
 let guesses=0
-let playAgain="yes"
+playAgain="y"
 
-while [[ "${playAgain,,}" =~ ^y* ]]; do
+while [[ "${playAgain,,}" =~ ^y ]]; do
         echo "Guess a number between 1 and 100"
 
         answer=$(( RANDOM % 100 + 1 ))

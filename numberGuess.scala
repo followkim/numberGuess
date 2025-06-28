@@ -9,7 +9,7 @@ def numberGuess(): Unit =
         var playAgain = "yes"
 
 
-        while (playAgain.startsWith("y")) {
+        while (playAgain.toLowerCase().startsWith("y")) {
                 var answer = rand.nextInt(100)+1
                 var guess = 0
                 var guesses = 0
@@ -31,3 +31,9 @@ def numberGuess(): Unit =
                 playAgain = readLine("Play again [y/n] :>")
         }
         println(s"Thank you for playing!")
+
+
+
+
+
+

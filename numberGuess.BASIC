@@ -1,0 +1,28 @@
+
+RANDOMIZE TIMER
+DIM playAgain AS String
+
+  DO
+    DIM answer AS INTEGER
+    DIM guess AS INTEGER
+    DIM guesses AS INTEGER
+    answer = INT((100 * RND) + 1)  ' Generate random value between 1 and 6
+    guess = 0 
+    guesses = 0 
+    
+    PRINT answer  ' Display the random integer
+    DO 
+      guesses += 1 
+      INPUT "Guess a number: "; guess
+      IF guess > answer THEN
+        PRINT guess; " is too high."
+      ELSEIF guess < answer THEN 
+        PRINT guess; " is too low."
+      END IF
+    LOOP UNTIL answer = guess
+    PRINT "You got it in "; guesses ; "guesses!"
+    INPUT "Play again? (y/n): "; playAgain
+    
+LOOP WHILE playAgain = "yes"
+' LOOP WHILE UCASE$(LEFT$(playAgain, 1)) = "yes"
+PRINT "Thanks for playing!"
